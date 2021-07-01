@@ -1,7 +1,7 @@
 <template>
   <h1>{{ msg }}</h1>
-  <h1>{{ $store.state }}</h1>
-  <h1>{{ $store.state.count }}</h1>
+  <h1>{{ count }}</h1>
+
   <el-button type="primary" @click="goAlert"> ElementPlus </el-button>
 </template>
 
@@ -18,6 +18,7 @@ export default defineComponent({
   data() {
     return {
       msg: 'msg',
+      count: this.$store.state.count, //注意这一块
     }
   },
   setup: () => {
@@ -26,7 +27,8 @@ export default defineComponent({
   },
   methods: {
     goAlert() {
-      console.log(1)
+      this.$store.commit('increment')
+      this.count = this.$store.state.count
     },
   },
 })

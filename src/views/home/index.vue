@@ -1,5 +1,7 @@
 <template>
   <h1>{{ msg }}</h1>
+  <h1>{{ $store.state }}</h1>
+  <h1>{{ $store.state.count }}</h1>
 </template>
 
 <script lang="ts">

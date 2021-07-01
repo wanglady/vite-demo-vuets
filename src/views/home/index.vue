@@ -2,6 +2,7 @@
   <h1>{{ msg }}</h1>
   <h1>{{ $store.state }}</h1>
   <h1>{{ $store.state.count }}</h1>
+  <el-button type="primary" @click="goAlert"> ElementPlus </el-button>
 </template>
 
 <script lang="ts">
@@ -22,6 +23,11 @@ export default defineComponent({
   setup: () => {
     const count = ref(0)
     return { count }
+  },
+  methods: {
+    goAlert() {
+      console.log(1)
+    },
   },
 })
 </script>

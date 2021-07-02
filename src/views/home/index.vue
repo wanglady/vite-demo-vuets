@@ -1,12 +1,19 @@
 <template>
   <h1>{{ msg }}</h1>
   <h1>{{ count }}</h1>
-
+  <h1>{{ readersNumber }}</h1>
+  <h1>{{ book }}</h1>
+  <h1>{{ book.title }}</h1>
+  <span v-bind:title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+  </span>
   <el-button type="primary" @click="goAlert"> ElementPlus </el-button>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent, reactive } from 'vue'
+import { useStore } from 'vuex'
+
 export default defineComponent({
   name: 'Home',
   props: {
@@ -18,17 +25,31 @@ export default defineComponent({
   data() {
     return {
       msg: 'msg',
-      count: this.$store.state.count, //注意这一块
+      message: 'You loaded this page on ' + new Date().toLocaleString(),
+      count: '', //注意这一块
     }
   },
   setup: () => {
-    const count = ref(0)
-    return { count }
+    const store = useStore()
+    console.log(store, 'store')
+    const readersNumber = ref(0)
+    const book = reactive({ title: 'Vue 3 Guide' })
+
+    // expose to template
+    return {
+      store,
+      readersNumber,
+      book,
+    }
+  },
+  mounted() {
+    this.count = this.store.state.count
   },
   methods: {
     goAlert() {
-      this.$store.commit('increment')
-      this.count = this.$store.state.count
+      this.store.commit('increment', 19)
+      this.count = this.store.state.count
+      this.msg = 'vue3.0'
     },
   },
 })

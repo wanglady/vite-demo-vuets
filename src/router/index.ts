@@ -9,6 +9,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: loadView('home'),
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: loadView('login'),
+  },
 ]
 const Router = createRouter({
   history,

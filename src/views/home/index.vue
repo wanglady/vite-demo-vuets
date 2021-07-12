@@ -1,13 +1,12 @@
 <template>
-  <h1>{{ msg }}</h1>
-  <h1>{{ count }}</h1>
-  <h1>{{ readersNumber }}</h1>
-  <h1>{{ book }}</h1>
-  <h1>{{ book.title }}</h1>
-  <span v-bind:title="message">
-    鼠标悬停几秒钟查看此处动态绑定的提示信息！
-  </span>
-  <el-button type="primary" @click="goAlert"> ElementPlus </el-button>
+  <div class="pageHome">
+    <h1>{{ count }}</h1>
+    <h1>{{ readersNumber }}</h1>
+    <h1>{{ book }}</h1>
+    <h1>{{ book.title }}</h1>
+    <div v-bind:title="message">鼠标悬停几秒钟查看此处动态绑定的提示信息！</div>
+    <el-button type="primary" @click="goAlert"> 登录 </el-button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -20,7 +19,6 @@ export default defineComponent({
   props: {},
   data() {
     return {
-      msg: 'msg',
       message: 'You loaded this page on ' + new Date().toLocaleString(),
       count: '', //注意这一块
     }
@@ -58,4 +56,11 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.pageHome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

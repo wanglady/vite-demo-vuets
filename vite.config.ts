@@ -1,12 +1,31 @@
 import { ConfigEnv, UserConfigExport, defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import resolve from 'path'
+import styleImport from 'vite-plugin-style-import'
 const srcPath = resolve.resolve(__dirname, 'src')
 
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return defineConfig({
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      styleImport({
+        libs: [
+          {
+            libraryName: 'element-plus',
+            esModule: true,
+            ensureStyleFile: true,
+            resolveStyle: name => {
+              name = name.slice(3)
+              return `element-plus/packages/theme-chalk/src/${name}.scss`
+            },
+            resolveComponent: name => {
+              return `element-plus/lib/${name}`
+            },
+          },
+        ],
+      }),
+    ],
     resolve: {
       alias: [{ find: '@', replacement: srcPath }],
     },

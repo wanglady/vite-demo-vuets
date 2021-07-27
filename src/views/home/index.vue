@@ -4,6 +4,8 @@
     <h1>{{ readersNumber }}</h1>
     <h1>{{ book }}</h1>
     <h1>{{ book.title }}</h1>
+    <h1>{{ message }}</h1>
+
     <div v-bind:title="message">鼠标悬停几秒钟查看此处动态绑定的提示信息！</div>
     <el-button type="primary" @click="goAlert"> 登录 </el-button>
   </div>
@@ -19,9 +21,14 @@ export default defineComponent({
   props: {},
   data() {
     return {
-      message: 'You loaded this page on ' + new Date().toLocaleString(),
       count: '', //注意这一块
+      timer: null,
     }
+  },
+  computed: {
+    message() {
+      return 'You loaded this page on ' + new Date().toLocaleString()
+    },
   },
   setup: () => {
     const store = useStore()
@@ -49,7 +56,6 @@ export default defineComponent({
     goAlert() {
       this.store.commit('increment', 19)
       this.count = this.store.state.count
-      this.msg = 'vue3.0'
       this.toLogin()
     },
   },
